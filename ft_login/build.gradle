@@ -1,0 +1,86 @@
+// 如果是发布版本时，各个模块都不能独立运行
+if (currentEnv != 0) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def rootProject = this.getRootProject().ext.rootProject
+def rootDependencies = this.getRootProject().ext.dependencies
+def commonDependencies = this.getRootProject().ext.common_dependencies
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        if (currentEnv == 0) {
+            applicationId featurePackage.home
+        }
+
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner rootProject.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("int", "currentEnv", String.valueOf(currentEnv))
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName(), packageNameForAPT: packageNameForAPT]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (currentEnv == 0) { // 如果是组件化模式，需要单独运行
+//                manifest.srcFile 'src/main/debug/AndroidManifest.xml'
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            } else {
+                // 集成化模式，整个项目打包apk
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    // release 时 debug 目录下文件不需要合并到主工程
+                    exclude '**/debug/**'
+                }
+//                resources {
+//                    exclude '**/debug/**'
+//                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // 循环引入依赖项
+    commonDependencies.each { k, v ->
+        implementation v
+    }
+
+    testImplementation rootDependencies.text.junit
+    androidTestImplementation rootDependencies.text.junit_ext
+    androidTestImplementation rootDependencies.text.espresso_core
+
+    // 公共基础库
+    implementation project(":lib_base")
+
+    // T路由 - 注解模块
+    implementation project(":trouter_annotation")
+    // T路由 - 注解处理模块
+    implementation project(":trouter_compiler")
+
+}

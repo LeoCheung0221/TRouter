@@ -1,0 +1,59 @@
+ext {
+    // 当前环境 测试 = 0、预发 = 1、正式 = 2
+    currentEnv = 0;
+
+    // 该包名下存放APT生成的所有类文件
+    packageNameForAPT = "com.tufusi.trouter.demo"
+
+    // 公共属性
+    rootProject = [
+            compileSdkVersion        : 30,
+            buildToolsVersion        : "30.0.2",
+
+            applicationId            : "com.tufusi.trouter.demo",
+            minSdkVersion            : 21,
+            targetSdkVersion         : 30,
+            versionCode              : 1,
+            versionName              : "1.0",
+            testInstrumentationRunner: "androidx.test.runner.AndroidJUnitRunner"
+    ]
+
+    // 业务组件包名
+    featurePackage = [
+            "login" : "com.tufusi.feature.login",
+            "order": "com.tufusi.feature.order"
+    ]
+
+    // 各环境服务器地址
+    dev_url = [
+            "debug"  : "https://xxxx/debug",
+            "pre"    : "https://xxxx/pre",
+            "release": "https://xxxx/release"
+    ]
+
+    common_dependencies = [
+            // system
+            "appcompat"    : 'androidx.appcompat:appcompat:1.2.0',
+            "constraint"   : 'androidx.constraintlayout:constraintlayout:2.0.4',
+            // kotlin
+            "kotlin-stdlib": "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version",
+            "kotlin_core"  : "androidx.core:core-ktx:1.3.2",
+    ]
+
+    // 公共依赖项管理
+    dependencies = [
+            test = [
+                    // test
+                    "junit"        : "junit:junit:4.12",
+                    "junit_ext"    : "androidx.test.ext:junit:1.1.2",
+                    "espresso_core": "androidx.test.espresso:espresso-core:3.3.0",
+            ],
+
+            libs = [
+                    // network
+                    "okhttp3" : "com.squareup.okhttp3:okhttp:3.10.0",
+                    "retrofit": "com.squareup.retrofit2:retrofit:2.5.0",
+                    "fastjson": "com.alibaba:fastjson:1.2.58",
+            ]
+    ]
+}

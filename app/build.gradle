@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def rootProject = this.getRootProject().ext.rootProject
+def rootDependencies = this.getRootProject().ext.dependencies
+def commonDependencies = this.getRootProject().ext.common_dependencies
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.applicationId
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner rootProject.testInstrumentationRunner
+
+        // buildConfigField(属性值类型, 属性值名称, 传值（必须是String）)
+        // 【注】不能在android根节点，只能在defaultConfig或buildTypes节点下
+        buildConfigField("int", "currentEnv", String.valueOf(currentEnv))
+
+        // 配置选项参数值，用于APT传参接收
+        // 【注】必须写在defaultConfig节点下
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName(), packageNameForAPT: packageNameForAPT]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // 循环引入依赖项
+    commonDependencies.each { k, v ->
+        implementation v
+    }
+
+    testImplementation rootDependencies.text.junit
+    androidTestImplementation rootDependencies.text.junit_ext
+    androidTestImplementation rootDependencies.text.espresso_core
+
+    // 公共基础库
+    implementation project(":lib_base")
+
+    // T路由 - 注解模块
+    implementation project(":trouter_annotation")
+    // T路由 - 注解处理模块
+    implementation project(":trouter_compiler")
+
+    // 如果不是集成化模式，做预发和发布版本时，各个模块都禁止独立运行
+    if (currentEnv != 0) {
+        // 首页模块
+        implementation project(":ft_home")
+        // 订单模块
+        implementation project(":ft_order")
+    }
+}
