@@ -1,8 +1,8 @@
+include ':trouter-compiler'
+include ':trouter-annotation'
 include ':ft_login'
 include ':ft_order'
 include ':lib_base'
-include ':trouter_api'
-include ':trouter_compiler'
-include ':trouter_annotation'
+include ':trouter-api'
 include ':app'
 rootProject.name = "TRouter"

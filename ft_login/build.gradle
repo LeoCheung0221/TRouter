@@ -1,11 +1,13 @@
 // 如果是发布版本时，各个模块都不能独立运行
-if (currentEnv != 0) {
-    apply plugin: 'com.android.library'
-} else {
+if (isModular) {
     apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
 }
+print(currentEnv)
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 def rootProject = this.getRootProject().ext.rootProject
 def rootDependencies = this.getRootProject().ext.dependencies
@@ -16,8 +18,8 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        if (currentEnv == 0) {
-            applicationId featurePackage.home
+        if (isModular) {
+            applicationId featurePackage.login
         }
 
         minSdkVersion rootProject.minSdkVersion
@@ -78,9 +80,8 @@ dependencies {
     // 公共基础库
     implementation project(":lib_base")
 
-    // T路由 - 注解模块
-    implementation project(":trouter_annotation")
-    // T路由 - 注解处理模块
-    implementation project(":trouter_compiler")
+    // T路由 - 注解模块 & 注解处理模块
+    implementation project(":trouter-annotation")
+    kapt project(":trouter-compiler")
 
 }

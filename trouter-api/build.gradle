@@ -1,6 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 def rootProject = this.getRootProject().ext.rootProject
 def commonDependencies = this.getRootProject().ext.common_dependencies
@@ -29,9 +27,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-
     implementation commonDependencies.appcompat
-    api project(':trouter-api') // 路由对外开放api模块
+    implementation project(':trouter-annotation')
 }

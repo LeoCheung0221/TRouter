@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 def rootProject = this.getRootProject().ext.rootProject
 def rootDependencies = this.getRootProject().ext.dependencies
@@ -54,10 +55,9 @@ dependencies {
     // 公共基础库
     implementation project(":lib_base")
 
-    // T路由 - 注解模块
-    implementation project(":trouter_annotation")
-    // T路由 - 注解处理模块
-    implementation project(":trouter_compiler")
+    // T路由 - 注解模块 & 注解处理模块
+    implementation project(":trouter-annotation")
+    kapt project(":trouter-compiler")
 
     // 如果不是集成化模式，做预发和发布版本时，各个模块都禁止独立运行
     if (currentEnv != 0) {

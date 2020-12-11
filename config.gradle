@@ -1,6 +1,9 @@
 ext {
     // 当前环境 测试 = 0、预发 = 1、正式 = 2
-    currentEnv = 0;
+    currentEnv = 0
+
+    // 是否是组件化开发
+    isModular = true
 
     // 该包名下存放APT生成的所有类文件
     packageNameForAPT = "com.tufusi.trouter.demo"
@@ -11,7 +14,7 @@ ext {
             buildToolsVersion        : "30.0.2",
 
             applicationId            : "com.tufusi.trouter.demo",
-            minSdkVersion            : 21,
+            minSdkVersion            : 26,
             targetSdkVersion         : 30,
             versionCode              : 1,
             versionName              : "1.0",
