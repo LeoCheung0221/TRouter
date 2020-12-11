@@ -6,7 +6,7 @@ ext {
     isModular = true
 
     // 该包名下存放APT生成的所有类文件
-    packageNameForAPT = "com.tufusi.trouter.demo"
+    packageNameForAPT = "com.tufusi.trouter.apt"
 
     // 公共属性
     rootProject = [

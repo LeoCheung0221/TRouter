@@ -1,4 +1,5 @@
-package com.tufusi.trouter.api;
+package com.tufusi.trouter.api.core;
+
 
 import com.tufusi.trouter.annotation.mode.RouterBean;
 

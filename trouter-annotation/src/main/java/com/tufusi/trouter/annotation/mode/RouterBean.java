@@ -114,4 +114,32 @@ public class RouterBean {
     public Element getElement() {
         return element;
     }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public void setElement(Element element) {
+        this.element = element;
+    }
+
+    @Override
+    public String toString() {
+        return "RouterBean{" +
+                "group='" + group + '\'' +
+                ", path='" + path + '\'' +
+                '}';
+    }
 }

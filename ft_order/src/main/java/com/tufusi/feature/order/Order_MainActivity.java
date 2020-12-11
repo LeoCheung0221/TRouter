@@ -6,11 +6,14 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tufusi.trouter.annotation.TRouter;
+
 /**
  * Created by LeoCheung on 2020/11/20.
  *
  * @description
  */
+@TRouter(path = "/order/Order_MainActivity")
 public class Order_MainActivity extends AppCompatActivity {
 
     @Override
