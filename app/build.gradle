@@ -43,6 +43,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     // 循环引入依赖项
     commonDependencies.each { k, v ->
         implementation v
@@ -62,7 +64,7 @@ dependencies {
     // 如果不是集成化模式，做预发和发布版本时，各个模块都禁止独立运行
     if (currentEnv != 0) {
         // 首页模块
-        implementation project(":ft_home")
+        implementation project(":ft_login")
         // 订单模块
         implementation project(":ft_order")
     }

@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tufusi.trouter.annotation.Parameter;
 import com.tufusi.trouter.annotation.TRouter;
 
 /**
@@ -15,6 +16,9 @@ import com.tufusi.trouter.annotation.TRouter;
  */
 @TRouter(path = "/order/Order_MainActivity")
 public class Order_MainActivity extends AppCompatActivity {
+
+    @Parameter(name = "order_status")
+    int orderStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

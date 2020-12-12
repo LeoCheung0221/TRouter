@@ -15,7 +15,12 @@ public class RouterBean {
         /**
          * 页面标记
          */
-        ACTIVITY
+        ACTIVITY,
+
+        /**
+         * 类实现IProvider接口
+         */
+        PROVIDER
     }
 
     /**

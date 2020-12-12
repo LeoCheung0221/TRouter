@@ -3,7 +3,7 @@ ext {
     currentEnv = 0
 
     // 是否是组件化开发
-    isModular = true
+    isModular = false
 
     // 该包名下存放APT生成的所有类文件
     packageNameForAPT = "com.tufusi.trouter.apt"
@@ -13,7 +13,7 @@ ext {
             compileSdkVersion        : 30,
             buildToolsVersion        : "30.0.2",
 
-            applicationId            : "com.tufusi.trouter.demo",
+            applicationId            : "com.tufusi.trouter",
             minSdkVersion            : 26,
             targetSdkVersion         : 30,
             versionCode              : 1,

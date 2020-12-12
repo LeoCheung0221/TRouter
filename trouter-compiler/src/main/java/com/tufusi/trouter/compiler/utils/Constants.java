@@ -11,6 +11,7 @@ public class Constants {
      * 注解处理器汇总支持的注解类型
      */
     public static final String TROUTER_ANNOTATION_TYPES = "com.tufusi.trouter.annotation.TRouter";
+    public static final String PARAMETER_ANNOTATION_TYPES = "com.tufusi.trouter.annotation.Parameter";
 
     /**
      * 每个模块的模块名 跟gradle里面的对应，为了可以传参到注解处理器接收
@@ -37,6 +38,7 @@ public class Constants {
      */
     public static final String TROUTER_GROUP = TROUTER_API_PKG + ".core.TRouterGroupLoad";
     public static final String TROUTER_PATH = TROUTER_API_PKG + ".core.TRouterPathLoad";
+    public static final String PARAMETER_LOAD = TROUTER_API_PKG + ".core.ParameterLoad";
 
     /**
      * JavaPoet 生成文件相关常量类提取
@@ -46,9 +48,16 @@ public class Constants {
     public static final String PARAMETER_PATH_LOAD_NAME = "pathMap";
     public static final String PARAMETER_GROUP_LOAD_NAME = "groupMap";
 
+    public static final String METHOD_PARAMETER_LOAD_NAME = "loadParameter";
+    public static final String PARAMETER_PARAMETER_LOAD_NAME = "target";
+
     /**
      * 路径对象生成文件的文件名前缀
      */
     public static final String PATH_FILE_NAME = "TRouter$$Path$$";
     public static final String GROUP_FILE_NAME = "TRouter$$Group$$";
+    public static final String PARAMETER_FILE_NAME = "$$Parameter";
+
+    // String全类名
+    public static final String STRING = "java.lang.String";
 }
